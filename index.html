@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gestión Organizacional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="screen active">
+  <div class="lbox">
+    <div class="llogo">
+      <span>Gestión Organizacional</span>
+      <small>Panel del equipo</small>
+    </div>
+    <h2>Selecciona tu perfil e ingresa</h2>
+    <div class="fld">
+      <label>Usuario</label>
+      <select id="sel-u"></select>
+    </div>
+    <div class="fld">
+      <label>Contraseña</label>
+      <input type="password" id="inp-p" placeholder="••••••••">
+    </div>
+    <button class="lbtn" id="btn-login">Ingresar</button>
+    <div class="lerr" id="lerr"></div>
+    <div class="lcreds">
+      <strong>Credenciales demo:</strong><br>
+      Admin → <code>admin123</code><br>
+      Todos los demás → <code>pass123</code>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="screen">
+  <div class="topbar">
+    <div class="tb-left">
+      <span class="tb-logo">GO</span>
+      <div class="tb-sep"></div>
+      <span class="tb-title" id="tb-t">Panel</span>
+    </div>
+    <div class="tb-right">
+      <div class="view-tabs" id="view-tabs">
+        <button class="vt-btn active" data-view="tree">Árbol</button>
+        <button class="vt-btn" data-view="grid">Lista</button>
+      </div>
+      <div class="upill">
+        <div class="uav" id="top-av">–</div>
+        <span class="uname" id="top-nm">–</span>
+      </div>
+      <button class="logbtn" id="btn-logout">Salir</button>
+    </div>
+  </div>
+
+  <!-- ADMIN: Árbol -->
+  <div id="v-tree" class="view hidden">
+    <div class="tree-wrap" id="tree-wrap">
+      <div class="tree-controls">
+        <button class="zoom-btn" id="zoom-out">−</button>
+        <span class="zoom-lbl" id="zoom-lbl">100%</span>
+        <button class="zoom-btn" id="zoom-in">+</button>
+        <button class="zoom-btn" id="zoom-reset">Reset</button>
+      </div>
+      <div class="tree-canvas" id="tree-canvas"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN: Lista -->
+  <div id="v-grid" class="view hidden">
+    <div class="awrap">
+      <div class="ahead">
+        <h1>Organigrama por proceso</h1>
+        <p>Haz clic en cada tarjeta para ver o editar el perfil</p>
+      </div>
+      <div class="search-bar">
+        <input type="text" id="srch" placeholder="Buscar por nombre o cargo...">
+        <select id="fil-proc"><option value="">Todos los procesos</option></select>
+      </div>
+      <div id="admin-tree"></div>
+    </div>
+  </div>
+
+  <!-- Vista Personal -->
+  <div id="v-pers" class="view hidden">
+    <div class="pwrap">
+      <div class="phead">
+        <div class="ppers-av" id="p-av"></div>
+        <div class="pinfo">
+          <h1 id="p-nm"></h1>
+          <p id="p-rl"></p>
+          <small id="p-bg"></small>
+        </div>
+      </div>
+      <div class="pform">
+        <h2>Mi perfil de trabajo</h2>
+        <div class="fg">
+          <label>Funciones que realizo</label>
+          <textarea id="p-fn" placeholder="Describe tus funciones y responsabilidades..."></textarea>
+        </div>
+        <div class="fg">
+          <label>Proceso que manejo</label>
+          <textarea id="p-pr" placeholder="Describe el proceso a tu cargo..."></textarea>
+        </div>
+        <div class="fg">
+          <label>Mejora que propongo</label>
+          <textarea id="p-mj" placeholder="¿Qué mejora quieres implementar?"></textarea>
+        </div>
+        <div class="fact">
+          <span class="smsgp" id="p-sm">✓ Guardado correctamente</span>
+          <button class="sfull" id="btn-save-p">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para editar persona desde el árbol -->
+<div id="modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-av" id="m-av"></div>
+      <div class="modal-info">
+        <h2 id="m-nm"></h2>
+        <p id="m-rl"></p>
+        <small id="m-bg"></small>
+      </div>
+      <button class="modal-close" id="m-close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="fg">
+        <label>Funciones</label>
+        <textarea id="m-fn" placeholder="Funciones del cargo..."></textarea>
+      </div>
+      <div class="fg">
+        <label>Proceso que maneja</label>
+        <textarea id="m-pr" placeholder="Proceso a cargo..."></textarea>
+      </div>
+      <div class="fg">
+        <label>Mejora propuesta</label>
+        <textarea id="m-mj" placeholder="Oportunidad de mejora..."></textarea>
+      </div>
+      <div class="fact">
+        <span class="smsgp" id="m-sm">✓ Guardado</span>
+        <button class="sfull" id="btn-save-m">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
